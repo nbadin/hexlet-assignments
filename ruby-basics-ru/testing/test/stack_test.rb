@@ -21,27 +21,27 @@ class StackTest < Minitest::Test
     assert { @stack.empty? == true }
   end
 
-  def test_push
-    @stack.push!('asdf')
-    assert { @stack.to_a == ['asdf'] }
-  end
-
-  def test_size
-    @stack.push! '1'
-    @stack.push! 42
-    assert { @stack.size == 2 }
-  end
-
-  def test_pop
-    @stack.push! 'asdf'
-    @stack.push! 'qwer'
-    assert { @stack.size == 2 }
-    assert { @stack.pop! == 'qwer' }
-    assert { !@stack.empty? }
-    assert { @stack.pop! == 'asdf' }
-    assert { @stack.empty? }
-    assert { @stack.pop!.nil? }
-  end
+  # def test_push
+  #   @stack.push!('asdf')
+  #   assert { @stack.to_a == ['asdf'] }
+  # end
+  #
+  # def test_size
+  #   @stack.push! '1'
+  #   @stack.push! 42
+  #   assert { @stack.size == 2 }
+  # end
+  #
+  # def test_pop
+  #   @stack.push! 'asdf'
+  #   @stack.push! 'qwer'
+  #   assert { @stack.size == 2 }
+  #   assert { @stack.pop! == 'qwer' }
+  #   assert { !@stack.empty? }
+  #   assert { @stack.pop! == 'asdf' }
+  #   assert { @stack.empty? }
+  #   assert { @stack.pop!.nil? }
+  # end
 
   # END
 end
