@@ -33,7 +33,7 @@ public class Application {
     public ResponseEntity<List<Post>> index(@RequestParam(defaultValue = "10") Integer limit) {
         var result = posts.subList(0, limit);
 
-        return ResponseEntity.ok().header("X-Total-Count", String.valueOf(result.size())).body(result);
+        return ResponseEntity.ok().header("X-Total-Count", String.valueOf(posts.size())).body(posts);
     }
 
     @GetMapping("/posts/{id}")
@@ -54,22 +54,20 @@ public class Application {
 
     @PutMapping("/posts/{id}")
     public ResponseEntity<Post> update(@PathVariable String id, @RequestBody Post data) {
-        HttpStatus status;
         var maybePost = posts.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst();
 
         if (maybePost.isPresent()) {
-            var response = HttpStatus.OK;
-            status = HttpStatus.NO_CONTENT;
             var post = maybePost.get();
             post.setId(data.getId());
             post.setTitle(data.getTitle());
             post.setBody(data.getBody());
+            posts.add(post);
+            return ResponseEntity.status(HttpStatus.OK).body(post);
         } else {
-            status = HttpStatus.NO_CONTENT;
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(data);
         }
-        return ResponseEntity.status(status).body(data);
     }
     // END
 
